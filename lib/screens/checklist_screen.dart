@@ -15,16 +15,9 @@ class CheckListScreen extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         itemCount: 10,
         itemBuilder: (ctx, i) {
-          return Container(
-            height: 70,
-            alignment: Alignment.centerLeft,
-            child: Card(
-              elevation: 1,
-              margin: EdgeInsets.symmetric(
-                vertical: 5,
-                horizontal: 10,
-              ),
-              child: ListTile(
+          return Column(
+            children: [
+              ListTile(
                 onTap: () {
                   Navigator.of(context)
                       .pushNamed(ChecklistDetailScreen.routeName);
@@ -34,7 +27,8 @@ class CheckListScreen extends StatelessWidget {
                 ),
                 title: Text('Checklist number $i'),
               ),
-            ),
+              Divider(),
+            ],
           );
         },
       ),
