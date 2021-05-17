@@ -1,6 +1,9 @@
-import 'package:checklist_app/screens/checklist_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../provider/category.dart';
+import './checklist_detail_screen.dart';
+import '../widgets/add_checklist_dialog.dart';
 
 class CheckListScreen extends StatelessWidget {
   static const routeName = '/checklist';
@@ -10,6 +13,17 @@ class CheckListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Category Name '),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () => showDialog(
+              context: context,
+              builder: (_) => AddChecklistDialog(),
+            ),
+            // onPressed: () => Provider.of<Category>(context, listen: false)
+            //     .addChecklist(null),
+          ),
+        ],
       ),
       body: ListView.builder(
         physics: BouncingScrollPhysics(),

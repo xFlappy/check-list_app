@@ -1,5 +1,9 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+import '../models/http_exception.dart';
 import './check-list.dart';
 import './check-list_item.dart';
 import './check-lists.dart';
@@ -120,10 +124,34 @@ class Category with ChangeNotifier {
   //METHODS
   //metodo per caricare le diverse categorie
   Future<void> fetchAndSetChecklists([bool filterByUser = false]) async {
-    return;
+    final filterString =
+        filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
+    var url = Uri.parse('');
   }
 
   //metodo per creare una nuova categoria
+  Future<void> addChecklist(CheckLists checklist) async {
+    final url = Uri.parse(
+        'https://flutter-checklist-default-rtdb.europe-west1.firebasedatabase.app/categories.json?auth=$authToken');
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode({
+          'title': checklist.title,
+        }),
+      );
+      final newChecklist = CheckLists(
+        json.decode(response.body)['name'],
+        checklist.title,
+        null,
+      );
+      _categoryItems.add(newChecklist);
+      notifyListeners();
+    } catch (error) {
+      print(error);
+      throw error;
+    }
+  }
 
   //metodo per aggiornare le categorie -> dopo un cambiamento
 
