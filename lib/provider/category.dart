@@ -5,7 +5,8 @@ import './check-list_item.dart';
 import './check-lists.dart';
 
 class Category with ChangeNotifier {
-  List<CheckLists> _items = [
+  // TEST DATA
+  List<CheckLists> _categoryItems = [
     CheckLists(
       'c1',
       'Sport',
@@ -13,7 +14,7 @@ class Category with ChangeNotifier {
         CheckList(
           id: 'l1',
           title: "Corsa d'orientamento",
-          list: [
+          items: [
             CheckListItem(title: 'Bussola'),
             CheckListItem(title: 'Gamasce'),
             CheckListItem(title: 'Scarpe'),
@@ -25,7 +26,7 @@ class Category with ChangeNotifier {
         CheckList(
           id: 'l2',
           title: "Nuoto",
-          list: [
+          items: [
             CheckListItem(title: 'Cuffia'),
             CheckListItem(title: 'Occhialini'),
             CheckListItem(title: 'Costume'),
@@ -37,7 +38,7 @@ class Category with ChangeNotifier {
         CheckList(
           id: 'l3',
           title: "Bici",
-          list: [
+          items: [
             CheckListItem(title: 'Occhiali'),
             CheckListItem(title: 'Borraccia'),
             CheckListItem(title: 'Telefono'),
@@ -47,6 +48,85 @@ class Category with ChangeNotifier {
           ],
         ),
       ],
-    )
+    ),
+    CheckLists(
+      'c2',
+      'Vacanze',
+      [
+        CheckList(
+          id: 'l11',
+          title: 'Mare',
+          items: [
+            CheckListItem(title: 'Costume'),
+            CheckListItem(title: 'Occhialini'),
+            CheckListItem(title: 'Materiale sport'),
+            CheckListItem(title: 'Pallone da calcio'),
+          ],
+        ),
+        CheckList(
+          id: 'l12',
+          title: 'Montagna',
+          items: [
+            CheckListItem(title: 'Scarponi'),
+            CheckListItem(title: 'Zaino'),
+            CheckListItem(title: 'Tenda'),
+            CheckListItem(title: 'Mantellina'),
+          ],
+        ),
+      ],
+    ),
+    CheckLists(
+      'c3',
+      'Feste',
+      [
+        CheckList(
+          id: 'l21',
+          title: 'Grigliata',
+          items: [
+            CheckListItem(title: 'Carbonella'),
+            CheckListItem(title: 'Carne'),
+            CheckListItem(title: 'Felpa'),
+            CheckListItem(title: 'Pallone da calcio'),
+          ],
+        ),
+        CheckList(
+          id: 'l22',
+          title: 'Lago',
+          items: [
+            CheckListItem(title: 'Costume'),
+            CheckListItem(title: 'Asciugamano'),
+            CheckListItem(title: 'Cibo'),
+            CheckListItem(title: 'Crema da sole'),
+          ],
+        ),
+      ],
+    ),
   ];
+  // servono per l'autenticazion e copiato dal shopApp
+  final String authToken;
+  final String userId;
+
+  Category(
+    this.authToken,
+    this.userId,
+    this._categoryItems,
+  );
+
+  //GETTERS
+  List<CheckLists> get categoryItems {
+    return [..._categoryItems];
+  }
+
+  //METHODS
+  //metodo per caricare le diverse categorie
+  Future<void> fetchAndSetChecklists([bool filterByUser = false]) async {
+    return;
+  }
+
+  //metodo per creare una nuova categoria
+
+  //metodo per aggiornare le categorie -> dopo un cambiamento
+
+  //metodo per eliminare una categoria
+
 }
